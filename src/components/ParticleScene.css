@@ -1,0 +1,15 @@
+.particle-scene {
+  z-index: 0;
+  position: fixed;
+  inset: 0;
+  background: var(--background, #222124);
+  pointer-events: none;
+}
+
+.particle-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  inset: 0;
+}

@@ -1,0 +1,61 @@
+:root {
+  --foreground: #00FF41;
+  --cursor-glow: rgba(0, 255, 65, 0.6);
+}
+
+/* Hide default cursor on devices with fine pointer */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* Custom Cursor Root */
+.custom-cursor {
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.custom-cursor[data-visible="true"] {
+  opacity: 1;
+}
+
+/* Canvas Ribbon Trail */
+.custom-cursor__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+/* Head Dot / Hover Ring */
+.custom-cursor__head {
+  --s: 8px;
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  background: var(--foreground, #00FF41);
+  box-shadow: 0 0 10px 2px var(--cursor-glow, rgba(0, 255, 65, 0.6));
+  will-change: transform;
+  border-radius: 50%;
+  transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              margin 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.2s ease-out,
+              box-shadow 0.2s ease-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Interactive hover ring expansion */
+.custom-cursor[data-hover="true"] .custom-cursor__head {
+  --s: 36px;
+  box-shadow: inset 0 0 0 1.5px var(--foreground, #00FF41),
+              0 0 12px var(--cursor-glow, rgba(0, 255, 65, 0.3));
+  background: transparent;
+}

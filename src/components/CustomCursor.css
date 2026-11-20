@@ -1,0 +1,59 @@
+:root {
+  --foreground: #f0f2f0;
+}
+
+/* Hide the default cursor only when the custom cursor is actively running on fine pointer devices */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* Custom Cursor Root Container */
+.custom-cursor {
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.custom-cursor[data-visible="true"] {
+  opacity: 1;
+}
+
+/* Canvas Trail */
+.custom-cursor__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+/* Cursor Head Dot / Ring */
+.custom-cursor__head {
+  --s: 8px;
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  background: var(--foreground, #f0f2f0);
+  box-shadow: 0 0 10px 2px var(--foreground, #f0f2f0);
+  will-change: transform;
+  border-radius: 50%;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              margin 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Hover state on interactive elements (links, buttons, etc.) */
+.custom-cursor[data-hover="true"] .custom-cursor__head {
+  --s: 40px;
+  box-shadow: inset 0 0 0 1px var(--foreground, #f0f2f0);
+  background: transparent;
+}
